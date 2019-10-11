@@ -4,7 +4,7 @@
 """
   iproute2mac
   CLI wrapper for basic network utilites on Mac OS X.
-  Homepage: https://github.com/brona/iproute2mac
+  Homepage: https://github.com/SpinlockLabs/iproute2mac
 
   The MIT License (MIT)
   Copyright (c) 2015 Bronislav Robenek <brona@robenek.me>
@@ -19,7 +19,7 @@ import types
 import socket
 
 # Version
-VERSION = '1.2.2'
+VERSION = '1.2.3'
 
 # Utilities
 SUDO = '/usr/bin/sudo'
