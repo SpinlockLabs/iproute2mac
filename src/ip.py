@@ -8,6 +8,7 @@
 
   The MIT License (MIT)
   Copyright (c) 2015 Bronislav Robenek <brona@robenek.me>
+  Copyright (c) 2019 Spinlock Labs
 """
 
 import sys

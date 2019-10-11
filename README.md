@@ -1,5 +1,4 @@
-iproute2mac
-===========
+# iproute2mac
 
 CLI wrapper for basic network utilities on Mac OS X inspired with iproute2 on Linux systems - `ip` command.
 
@@ -13,20 +12,22 @@ For advanced usage use `netstat`, `ifconfig`, `ndp`, `arp`, `route` and `network
 
 A) Using [Homebrew](http://brew.sh):
 
-    # [Optional] Install Homebrew first - see http://brew.sh for more options
-    $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-    # Install iproute2mac
-    $ brew install iproute2mac
+```bash
+# [Optional] Install Homebrew first - see http://brew.sh for more options
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# Install iproute2mac
+brew install iproute2mac
+```
 
 B) Manual installation:
 
-    $ curl --remote-name -L https://github.com/brona/iproute2mac/raw/master/src/ip.py
-    $ chmod +x ip.py
-    $ mv ip.py /usr/local/bin/ip
+```bash
+curl --remote-name -L https://github.com/SpinlockLabs/iproute2mac/raw/master/src/ip.py
+chmod +x ip.py
+mv ip.py /usr/local/bin/ip
+```
 
-
-## Supported commands / Example usage
+## Supported Commands / Example Usage
 
 Goal of this utility is to provide compatible CLI with [iproute2](http://www.policyrouting.org/iproute2.doc.html), supporting same command shortcuts and user experience.
 
@@ -68,60 +69,6 @@ Goal of this utility is to provide compatible CLI with [iproute2](http://www.pol
   * Add default route `ip route add default nexthop 10.0.0.1`
   * Remove static route `ip route del 192.168.0.0/16`
 
-## Supported Mac OS X versions (Tested)
-
-* OS X El Capitan 10.11.6 (Python 2.7.10)
-
-## Changelog
-
-**v1.2.2**
-* Fixed handling arguments while using `ip -4` (Thanks @bsholdice)
-* Fixed `ip help` (Thanks @KireinaHoro)
-
-**v1.2.1**
-* Fixed error return codes and test script
-* `ip neigh flush` now requires specific device (consistent behaviour with iproute2)
-
-**v1.2.0**
-* Enhanced input parsing to support arbitrary length commands (Thanks @deployable)
-* Simple test script added (Thanks @deployable)
-* Fixed error return codes to simulate iproute2 (At this moment help messages are inconsistently printed to stderr for all errors unlinke iproute2 behaviour)
-
-**v1.1.2**
-* Correctly show `src` for `ip route get` on IPv6 addresses (Thanks @codeaholics)
-
-**v1.1.1**
-* Added `dev` option to `ip route add` command (Thanks @ThangCZ)
-
-**v1.1.0**
-* Added source IP address to `ip route get` command
-* Accepted to Homebrew master branch, tap is no longer supported
-
-**v1.0.9**
-* Fixed versioning
-
-**v1.0.8**
-* Better error handling and error messages (Thanks @rgcr)
-
-**v1.0.7**
-* Help messages are sent to stderr (Thanks @rgcr)
-
-**v1.0.6**
-* Fixed `ip -6 neigh` failing for N status flag
-
-**v1.0.5**
-* Added `s` shortcuts to `show` commands (Thanks @vmoutoussamy)
-
-**v1.0.4**
-* Added `ip neigh flush` (Thanks ThangCZ)
-* Added 'dev' option for `ip neigh show` and `ip neigh flush`
-
-**v1.0.3**
-* Fixed `ifconfig: dev: bad value` in `ip addr del`
-
-**v1.0.2**
-* Interface name is concatenated to `ip addr` inet rows
-
 ## Authors
 
 See AUTHORS.
@@ -133,4 +80,4 @@ Used software/code:
 
 ## License
 
-* The MIT License (MIT)
+The MIT License (MIT)
