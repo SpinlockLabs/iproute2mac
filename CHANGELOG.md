@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2.4
+
+* Use Python 3.
+
 ## v1.2.3
 
 * First release under Spinlock Labs.
