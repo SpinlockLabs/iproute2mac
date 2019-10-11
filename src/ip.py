@@ -97,7 +97,7 @@ def do_help():
     perror("       OPTIONS := { -4 | -6 }")
     perror("")
     perror("iproute2mac")
-    perror("Homepage: https://github.com/brona/iproute2mac")
+    perror("Homepage: https://github.com/SpinlockLabs/iproute2mac")
     perror("This is CLI wrapper for basic network utilities on Mac OS X inspired with iproute2 on Linux systems.")
     perror("Provided functionality is limited and command output is not fully compatible with iproute2.")
     perror("For advanced usage use netstat, ifconfig, ndp, arp, route and networksetup directly.")
