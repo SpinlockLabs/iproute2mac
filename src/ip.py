@@ -108,7 +108,7 @@ def do_help():
 def do_help_route():
     perror("Usage: ip route list")
     perror("       ip route get ADDRESS")
-    perror("       ip route { add | del } ROUTE")
+    perror("       ip route { add | del | flush | replace } ROUTE")
     perror("ROUTE := PREFIX [ nexthop NH ]")
     exit(255)
 
@@ -153,6 +153,14 @@ def do_route(argv, af):
     elif 'get'.startswith(argv[0]) and len(argv) == 2:
         argv.pop(0)
         return do_route_get(argv, af)
+    elif 'flush'.startswith(argv[0]) and len(argv) == 2:
+        argv.pop(0)
+        return do_route_flush(argv, af)
+    elif 'replace'.startswith(argv[0]) and len(argv) >= 4:
+        if len(argv) > 0:
+            argv.pop(0)
+        do_route_del(argv, af)
+        return do_route_add(argv, af)
     else:
         return False
     return True
@@ -181,7 +189,7 @@ def do_route_list(af):
             if flags.find('W') != -1 or flags.find('H') != -1:
                 continue
             if re.match("link.+", gw):
-                print(target + ' dev ' + dev + '  scope link')
+                print(target + ' dev ' + dev + ' scope link')
             else:
                 print(target + ' via ' + gw + ' dev ' + dev)
         else:
@@ -212,7 +220,7 @@ def do_route_list(af):
 
                 if re.match("link.+", gw):
                     print(addr + '/' + str(netmask) +
-                          ' dev ' + dev + '  scope link')
+                          ' dev ' + dev + ' scope link')
                 else:
                     print(addr + '/' + str(netmask) +
                           ' via ' + gw + ' dev ' + dev)
@@ -241,6 +249,15 @@ def do_route_del(argv, af):
         af = 6
         inet = "-inet6 "
     return execute_cmd(SUDO + " " + ROUTE + " delete " + inet + target)
+
+
+def do_route_flush(argv, af):
+    target = argv[0]
+    status, res = subprocess.getstatusoutput(SUDO + " " + ROUTE + " -n flush ")
+    if status:  # unix status or not in table
+        perror(res)
+        return False
+    return True
 
 
 def do_route_get(argv, af):
@@ -373,6 +390,12 @@ def do_addr_show(argv, af):
 def do_addr_add(argv, af):
     if len(argv) < 2:
         return False
+
+    dst = ""
+    if argv[1] == "peer":
+        argv.pop(1)
+        dst = argv.pop(1)
+
     if argv[1] == "dev":
         argv.pop(1)
     else:
@@ -388,7 +411,7 @@ def do_addr_add(argv, af):
     if ":" in addr or af == 6:
         af = 6
         inet = " inet6"
-    return execute_cmd(SUDO + " " + IFCONFIG + " " + dev + inet + " add " + addr)
+    return execute_cmd(SUDO + " " + IFCONFIG + " " + dev + inet + " add " + addr + " " + dst)
 
 
 def do_addr_del(argv, af):
